@@ -13,7 +13,7 @@ npm install
 启动开发服务器：
 
 ```bash
-bash run dev
+npm run dev
 ```
 
 启动后，访问 `http://localhost:5173` 地址进行页面开发。
