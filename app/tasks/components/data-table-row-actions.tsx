@@ -1,34 +1,39 @@
 import type {Row} from "@tanstack/react-table";
-import {taskSchema} from "~/tasks/data/schema";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator, DropdownMenuShortcut,
+  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
 import {Button} from "~/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
+import type {Task} from "~/lib/schema";
 
 interface DataTableRowActionsProps<TData> {
-  row: Row<TData>
+  row: Row<TData>,
+  removeFn: (id: number) => void
 }
 
-export function DataTableRowActions<TData>({row}: DataTableRowActionsProps<TData>) {
-  const task = taskSchema.parse(row.original)
+export function DataTableRowActions<TData>({row, removeFn}: DataTableRowActionsProps<TData>) {
+  const task = row.original as Task;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
-          <MoreHorizontal />
+          <MoreHorizontal/>
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem>编辑</DropdownMenuItem>
         <DropdownMenuSeparator/>
-        <DropdownMenuItem>删除</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            removeFn(task.id)
+          }}
+        >删除</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
