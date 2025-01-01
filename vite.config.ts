@@ -11,4 +11,5 @@ export default defineConfig({
     },
   },
   plugins: [reactRouter(), tsconfigPaths()],
+  envPrefix: "AUTO_ANIMATION"
 });

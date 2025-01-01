@@ -1,13 +1,4 @@
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUp,
-  CheckCircle,
-  Circle,
-  CircleOff, ClipboardPenLine,
-  HelpCircle,
-  Timer,
-} from "lucide-react"
+import {CheckCircle, CircleOff, ClipboardPenLine, Loader, Timer} from "lucide-react"
 
 export const labels = [
   {
@@ -22,23 +13,28 @@ export const labels = [
 
 export const statuses = [
   {
-    value: "draft",
+    value: "DRAFT",
     label: "草稿",
     icon: ClipboardPenLine,
   },
   {
-    value: "in progress",
+    value: "PREPARE",
+    label: "准备",
+    icon: Loader,
+  },
+  {
+    value: "EXECUTING",
     label: "执行中",
     icon: Timer,
   },
   {
-    value: "done",
+    value: "COMPLETED",
     label: "完成",
     icon: CheckCircle,
   },
   {
-    value: "canceled",
+    value: "CANCEL",
     label: "取消",
-    icon: CircleOff,
-  },
+    icon: CircleOff
+  }
 ]
