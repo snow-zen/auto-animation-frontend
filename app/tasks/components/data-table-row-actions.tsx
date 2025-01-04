@@ -11,12 +11,12 @@ import {
 } from "~/components/ui/dropdown-menu"
 import type { Task } from "~/lib/schema"
 
-interface DataTableRowActionsProps<TData> {
-  row: Row<TData>
+interface DataTableRowActionsProps {
+  row: Row<Task>
   removeFn: (id: number) => void
 }
 
-export function DataTableRowActions<TData>({ row, removeFn }: DataTableRowActionsProps<TData>) {
+export function DataTableRowActions({ row, removeFn }: DataTableRowActionsProps) {
   const task = row.original as Task
 
   return (

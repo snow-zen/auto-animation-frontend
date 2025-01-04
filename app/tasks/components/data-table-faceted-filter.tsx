@@ -16,10 +16,11 @@ import {
 } from "~/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
 import { Separator } from "~/components/ui/separator"
+import type { Task } from "~/lib/schema"
 import { cn } from "~/lib/utils"
 
-interface DataTableFacetedFilterProps<TData, TValue> {
-  column?: Column<TData, TValue>
+interface DataTableFacetedFilterProps {
+  column?: Column<Task>
   title?: string
   options: {
     label: string
@@ -28,11 +29,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   }[]
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
-  column,
-  title,
-  options,
-}: DataTableFacetedFilterProps<TData, TValue>) {
+export function DataTableFacetedFilter({ column, title, options }: DataTableFacetedFilterProps) {
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue() as string[])
 
