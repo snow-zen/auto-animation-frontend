@@ -1,4 +1,4 @@
-import {CheckCircle, CircleOff, ClipboardPenLine, Loader, Timer} from "lucide-react"
+import { CheckCircle, CircleOff, ClipboardPenLine, Loader, Timer } from "lucide-react"
 
 export const labels = [
   {
@@ -35,6 +35,6 @@ export const statuses = [
   {
     value: "CANCEL",
     label: "取消",
-    icon: CircleOff
-  }
+    icon: CircleOff,
+  },
 ]

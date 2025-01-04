@@ -1,44 +1,53 @@
 import {
+  type QueryClient,
+  type UseMutationResult,
+  keepPreviousData,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query"
+import {
   type ColumnDef,
   type ColumnFiltersState,
+  type SortingState,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getSortedRowModel,
-  type SortingState,
-  useReactTable
+  useReactTable,
 } from "@tanstack/react-table"
-import {DataTableToolbar} from './data-table-toolbar'
-import React from "react";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "~/components/ui/table";
-import {DataTablePagination} from "~/tasks/components/data-table-pagination";
-import type {Pagination, Task} from "~/lib/schema";
-import {keepPreviousData, type QueryClient, useMutation, type UseMutationResult, useQuery} from "@tanstack/react-query";
-import {deleteTask, tasksPage} from "~/lib/api/tasks";
-import {debounce} from "~/lib/utils";
-import {Checkbox} from "~/components/ui/checkbox";
-import {DataTableColumnHeader} from "~/tasks/components/data-table-column-header";
-import {labels, statuses} from "~/tasks/data/data";
-import {Badge} from "~/components/ui/badge";
-import {DataTableRowActions} from "~/tasks/components/data-table-row-actions";
+
+import React from "react"
+
+import { Badge } from "~/components/ui/badge"
+import { Checkbox } from "~/components/ui/checkbox"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table"
+import { deleteTask, tasksPage } from "~/lib/api/tasks"
+import type { Pagination, Task } from "~/lib/schema"
+import { debounce } from "~/lib/utils"
+import { DataTableColumnHeader } from "~/tasks/components/data-table-column-header"
+import { DataTablePagination } from "~/tasks/components/data-table-pagination"
+import { DataTableRowActions } from "~/tasks/components/data-table-row-actions"
+import { labels, statuses } from "~/tasks/data/data"
+
+import { DataTableToolbar } from "./data-table-toolbar"
 
 interface DataTableProps {
   queryClient: QueryClient
 }
 
-export function DataTable({queryClient}: DataTableProps) {
+export function DataTable({ queryClient }: DataTableProps) {
   // 创建相关状态
   const [rowSelection, setRowSelection] = React.useState({})
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState<Pagination>({
     pageIndex: 0,
-    pageSize: 10
+    pageSize: 10,
   })
   const [columnFilters, setColumnFilters] = debounce(React.useState<ColumnFiltersState>([]), 1000)
 
   // 定义查询
-  const queryKey = ['data', pagination, columnFilters]
+  const queryKey = ["data", pagination, columnFilters]
   const dataQuery = useQuery({
     queryKey,
     queryFn: () => {
@@ -46,16 +55,16 @@ export function DataTable({queryClient}: DataTableProps) {
       const statusFilter = columnFilters.find((it) => it.id === "status")
       return tasksPage(pagination, {
         title: (titleFilter?.value as string) ?? "",
-        status: (statusFilter?.value as string[]) ?? []
+        status: (statusFilter?.value as string[]) ?? [],
       })
     },
-    placeholderData: keepPreviousData
+    placeholderData: keepPreviousData,
   })
 
   // 删除 Hook
   const removeTaskMutation = useMutation({
     mutationFn: (taskId: number) => deleteTask(taskId),
-    onSuccess: () => queryClient.invalidateQueries({queryKey})
+    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
   })
 
   const columns = getColumnDef(removeTaskMutation)
@@ -80,12 +89,12 @@ export function DataTable({queryClient}: DataTableProps) {
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-    debugTable: true
+    debugTable: true,
   })
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table}/>
+      <DataTableToolbar table={table} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -94,12 +103,7 @@ export function DataTable({queryClient}: DataTableProps) {
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder ?
-                        null :
-                        flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   )
                 })}
@@ -111,21 +115,13 @@ export function DataTable({queryClient}: DataTableProps) {
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && "select"}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
+                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   无数据。
                 </TableCell>
               </TableRow>
@@ -133,7 +129,7 @@ export function DataTable({queryClient}: DataTableProps) {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table}/>
+      <DataTablePagination table={table} />
     </div>
   )
 }
@@ -142,60 +138,53 @@ function getColumnDef(removeTaskMutation: UseMutationResult<void, Error, number,
   return [
     {
       id: "select",
-      header: ({table}) => (
+      header: ({ table }) => (
         <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)} aria-label="Select all"
-          className="translate-y-[2px]"/>
+          checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+          className="translate-y-[2px]"
+        />
       ),
-      cell: ({row}) => (
+      cell: ({ row }) => (
         <Checkbox
-          checked={row.getIsSelected()} onCheckedChange={(value) => row.toggleSelected(!!value)} aria-label="Select row"
-          className="translate-y-[2px]"/>
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+          className="translate-y-[2px]"
+        />
       ),
       enableSorting: false,
-      enableHiding: false
+      enableHiding: false,
     },
     {
       accessorKey: "id",
-      header: ({column}) => (
-        <DataTableColumnHeader column={column} title="任务 ID"/>
-      ),
-      cell: ({row}) => <div className="w-[80px]">{row.getValue("id")}</div>,
+      header: ({ column }) => <DataTableColumnHeader column={column} title="任务 ID" />,
+      cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
       enableSorting: false,
       enableHiding: false,
     },
     {
       accessorKey: "title",
-      header: ({column}) => (
-        <DataTableColumnHeader column={column} title="标题"/>
-      ),
-      cell: ({row}) => {
+      header: ({ column }) => <DataTableColumnHeader column={column} title="标题" />,
+      cell: ({ row }) => {
         const label = labels.find((label) => label.value === row.original.label)
 
         return (
           <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("title")}
-          </span>
+            <span className="max-w-[500px] truncate font-medium">{row.getValue("title")}</span>
             {label && <Badge variant="outline">{label.label}</Badge>}
           </div>
         )
       },
       enableSorting: false,
-      enableHiding: false
+      enableHiding: false,
     },
     {
       accessorKey: "status",
-      header: ({column}) => (
-        <DataTableColumnHeader column={column} title="状态"/>
-      ),
-      cell: ({row}) => {
-        const status = statuses.find(
-          (status) => status.value === row.getValue("status")
-        )
+      header: ({ column }) => <DataTableColumnHeader column={column} title="状态" />,
+      cell: ({ row }) => {
+        const status = statuses.find((status) => status.value === row.getValue("status"))
 
         if (!status) {
           return null
@@ -203,24 +192,18 @@ function getColumnDef(removeTaskMutation: UseMutationResult<void, Error, number,
 
         return (
           <div className="flex w-[100px] items-center">
-            {status.icon && (
-              <status.icon className="mr-2 h-4 w-4 text-muted-foreground"/>
-            )}
-            <span>
-            {status.label}
-          </span>
+            {status.icon && <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
+            <span>{status.label}</span>
           </div>
         )
       },
       enableSorting: false,
-      enableHiding: false
+      enableHiding: false,
     },
     {
       id: "actions",
-      header: ({column}) => (
-        <DataTableColumnHeader column={column} title="操作"/>
-      ),
-      cell: ({row}) => <DataTableRowActions row={row} removeFn={removeTaskMutation.mutate}/>
-    }
+      header: ({ column }) => <DataTableColumnHeader column={column} title="操作" />,
+      cell: ({ row }) => <DataTableRowActions row={row} removeFn={removeTaskMutation.mutate} />,
+    },
   ]
 }
