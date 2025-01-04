@@ -1,17 +1,19 @@
-import type {Table} from "@tanstack/react-table";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
-import {Button} from "~/components/ui/button";
-import {ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight} from "lucide-react";
+import type { Table } from "@tanstack/react-table"
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
+
+import { Button } from "~/components/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select"
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
 }
 
-export function DataTablePagination<TData>({table}: DataTablePaginationProps<TData>) {
+export function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between px-2">
       <div className="flex-1 text-sm text-muted-foreground">
-        当前页面一共 {table.getFilteredRowModel().rows.length} 行，选中 {table.getFilteredSelectedRowModel().rows.length} 行。
+        当前页面一共 {table.getFilteredRowModel().rows.length} 行，选中{" "}
+        {table.getFilteredSelectedRowModel().rows.length} 行。
       </div>
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
@@ -23,7 +25,7 @@ export function DataTablePagination<TData>({table}: DataTablePaginationProps<TDa
             }}
           >
             <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue placeholder={table.getState().pagination.pageSize}/>
+              <SelectValue placeholder={table.getState().pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side="top">
               {[10, 20, 30, 40, 50].map((pageSize) => (
@@ -45,7 +47,7 @@ export function DataTablePagination<TData>({table}: DataTablePaginationProps<TDa
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">去到第一页</span>
-            <ChevronsLeft/>
+            <ChevronsLeft />
           </Button>
           <Button
             variant="outline"
@@ -54,7 +56,7 @@ export function DataTablePagination<TData>({table}: DataTablePaginationProps<TDa
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">去到上一页</span>
-            <ChevronLeft/>
+            <ChevronLeft />
           </Button>
           <Button
             variant="outline"
@@ -63,7 +65,7 @@ export function DataTablePagination<TData>({table}: DataTablePaginationProps<TDa
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">去到下一页</span>
-            <ChevronRight/>
+            <ChevronRight />
           </Button>
           <Button
             variant="outline"
@@ -72,7 +74,7 @@ export function DataTablePagination<TData>({table}: DataTablePaginationProps<TDa
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">去到最后一页</span>
-            <ChevronsRight/>
+            <ChevronsRight />
           </Button>
         </div>
       </div>

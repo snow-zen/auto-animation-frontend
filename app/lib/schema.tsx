@@ -1,17 +1,17 @@
 export interface Pagination {
-  pageIndex: number,
+  pageIndex: number
   pageSize: number
 }
 
 export interface Page<T> {
-  pageIndex: number,
-  data: T[],
+  pageIndex: number
+  data: T[]
   count: number
 }
 
 export interface Task {
-  id: number,
-  title: string,
-  status: string,
+  id: number
+  title: string
+  status: string
   label?: string
 }
