@@ -3,14 +3,15 @@ import { X } from "lucide-react"
 
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
+import type { Task } from "~/lib/schema"
 import { DataTableFacetedFilter } from "~/tasks/components/data-table-faceted-filter"
 import { statuses } from "~/tasks/data/data"
 
-interface DataTableToolbarProps<TData> {
-  table: Table<TData>
+interface DataTableToolbarProps {
+  table: Table<Task>
 }
 
-export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar({ table }: DataTableToolbarProps) {
   const isFiltered = table.getState().columnFilters.length > 0
 
   return (
