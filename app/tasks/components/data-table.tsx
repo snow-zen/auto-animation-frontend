@@ -134,6 +134,10 @@ export function DataTable({ queryClient }: DataTableProps) {
   )
 }
 
+/**
+ * 任务列定义。
+ * @param removeTaskMutation 删除任务回调。
+ */
 function getColumnDef(removeTaskMutation: UseMutationResult<void, Error, number, unknown>): ColumnDef<Task>[] {
   return [
     {
