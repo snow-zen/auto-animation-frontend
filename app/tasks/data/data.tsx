@@ -1,5 +1,8 @@
 import { CheckCircle, CircleOff, ClipboardPenLine, Loader, Timer } from "lucide-react"
 
+/**
+ * 任务标签枚举。
+ */
 export const labels = [
   {
     value: "Movie",
@@ -11,6 +14,9 @@ export const labels = [
   },
 ]
 
+/**
+ * 任务状态列表。
+ */
 export const statuses = [
   {
     value: "DRAFT",
