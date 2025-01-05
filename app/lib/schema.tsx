@@ -49,5 +49,5 @@ export interface Task {
   /**
    * 任务标签。
    */
-  label?: string
+  labels: Record<string, string>
 }
