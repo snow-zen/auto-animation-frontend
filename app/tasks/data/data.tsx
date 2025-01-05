@@ -1,18 +1,21 @@
 import { CheckCircle, CircleOff, ClipboardPenLine, Loader, Timer } from "lucide-react"
 
+const animationTypeLabel = "animation.type"
+const supportLabels = [animationTypeLabel]
+
 /**
- * 任务标签枚举。
+ * 需要展示的标签。
+ * @param record 标签字典。
  */
-export const labels = [
-  {
-    value: "Movie",
-    label: "电影",
-  },
-  {
-    value: "TV",
-    label: "TV",
-  },
-]
+export function needShowLabel(record: Record<string, string>) {
+  const result: string[] = []
+  for (const [key, value] of Object.entries(record)) {
+    if (supportLabels.includes(key)) {
+      result.push(value)
+    }
+  }
+  return result
+}
 
 /**
  * 任务状态列表。

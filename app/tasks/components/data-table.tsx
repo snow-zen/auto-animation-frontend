@@ -28,7 +28,7 @@ import { debounce } from "~/lib/utils"
 import { DataTableColumnHeader } from "~/tasks/components/data-table-column-header"
 import { DataTablePagination } from "~/tasks/components/data-table-pagination"
 import { DataTableRowActions } from "~/tasks/components/data-table-row-actions"
-import { labels, statuses } from "~/tasks/data/data"
+import { needShowLabel, statuses } from "~/tasks/data/data"
 
 import { DataTableToolbar } from "./data-table-toolbar"
 
@@ -172,12 +172,13 @@ function getColumnDef(removeTaskMutation: UseMutationResult<void, Error, number,
       accessorKey: "title",
       header: ({ column }) => <DataTableColumnHeader column={column} title="标题" />,
       cell: ({ row }) => {
-        const label = labels.find((label) => label.value === row.original.label)
-
+        const label = needShowLabel(row.original.labels)
         return (
           <div className="flex space-x-2">
             <span className="max-w-[500px] truncate font-medium">{row.getValue("title")}</span>
-            {label && <Badge variant="outline">{label.label}</Badge>}
+            {label.map((item) => {
+              return <Badge variant="outline">{item}</Badge>
+            })}
           </div>
         )
       },

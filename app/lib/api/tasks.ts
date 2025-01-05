@@ -26,6 +26,7 @@ export interface TasksPageFilter {
 export async function tasksPage(pageProps: Pagination, pageFilter: TasksPageFilter): Promise<Page<Task> | undefined> {
   try {
     const resp = await axios.get<Page<Task>>("/tasks/page", {
+      baseURL: autoAnimationUrl,
       params: {
         pageIndex: pageProps.pageIndex,
         pageSize: pageProps.pageSize,
@@ -37,7 +38,6 @@ export async function tasksPage(pageProps: Pagination, pageFilter: TasksPageFilt
           arrayFormat: "comma",
         })
       },
-      baseURL: autoAnimationUrl,
     })
     return resp.data
   } catch (error) {
