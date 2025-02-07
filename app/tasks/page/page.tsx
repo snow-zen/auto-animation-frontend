@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-import { DataTable } from "~/tasks/components/data-table"
+import { DataTable } from "~/tasks/page/components/data-table"
 
 export default function TaskPage() {
   const queryClient = new QueryClient()

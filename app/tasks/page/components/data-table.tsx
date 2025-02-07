@@ -25,10 +25,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~
 import { deleteTask, tasksPage } from "~/lib/api/tasks"
 import type { Pagination, Task } from "~/lib/schema"
 import { debounce } from "~/lib/utils"
-import { DataTableColumnHeader } from "~/tasks/components/data-table-column-header"
-import { DataTablePagination } from "~/tasks/components/data-table-pagination"
-import { DataTableRowActions } from "~/tasks/components/data-table-row-actions"
-import { needShowLabel, statuses } from "~/tasks/data/data"
+import { DataTableColumnHeader } from "~/tasks/page/components/data-table-column-header"
+import { DataTablePagination } from "~/tasks/page/components/data-table-pagination"
+import { DataTableRowActions } from "~/tasks/page/components/data-table-row-actions"
+import { needShowLabel, statuses } from "~/tasks/page/data/data"
 
 import { DataTableToolbar } from "./data-table-toolbar"
 

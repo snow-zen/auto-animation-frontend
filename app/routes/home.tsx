@@ -1,4 +1,4 @@
-import TaskPage from "~/tasks/page"
+import TaskPage from "~/tasks/page/page"
 
 export function meta() {
   return [{ title: "Auto-animation" }, { name: "description", content: "auto-animation project" }]

@@ -4,8 +4,8 @@ import { X } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import type { Task } from "~/lib/schema"
-import { DataTableFacetedFilter } from "~/tasks/components/data-table-faceted-filter"
-import { statuses } from "~/tasks/data/data"
+import { DataTableFacetedFilter } from "~/tasks/page/components/data-table-faceted-filter"
+import { statuses } from "~/tasks/page/data/data"
 import { Link } from "react-router"
 
 interface DataTableToolbarProps {
