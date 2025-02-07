@@ -6,6 +6,7 @@ import { Input } from "~/components/ui/input"
 import type { Task } from "~/lib/schema"
 import { DataTableFacetedFilter } from "~/tasks/components/data-table-faceted-filter"
 import { statuses } from "~/tasks/data/data"
+import { Link } from "react-router"
 
 interface DataTableToolbarProps {
   table: Table<Task>
@@ -36,7 +37,9 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
         )}
       </div>
       <Button variant="secondary" className="h-8 w-[70px] px-2 lg:px-3">
-        添加
+        <Link to="/tasks/add">
+          添加
+        </Link>
       </Button>
     </div>
   )
