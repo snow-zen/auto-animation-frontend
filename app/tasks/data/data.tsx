@@ -1,7 +1,7 @@
 import { CheckCircle, CircleOff, ClipboardPenLine, Loader, Timer } from "lucide-react"
 
-const animationTypeLabel = "animation.type"
-const supportLabels = [animationTypeLabel]
+const taskTypeLabel = "task.type"
+const supportLabels = [taskTypeLabel]
 
 /**
  * 需要展示的标签。
