@@ -2,8 +2,9 @@
   "singleQuote": false,
   "trailingComma": "es5",
   "semi": false,
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
   "importOrder": ["^react$", "^[~/]", "^[./]"],
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "tailwindConfig": "./tailwind.config.ts"
 }
