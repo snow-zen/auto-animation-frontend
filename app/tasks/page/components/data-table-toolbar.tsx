@@ -1,12 +1,12 @@
 import type { Table } from "@tanstack/react-table"
 import { X } from "lucide-react"
+import { Link } from "react-router"
 
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import type { Task } from "~/lib/schema"
 import { DataTableFacetedFilter } from "~/tasks/page/components/data-table-faceted-filter"
 import { statuses } from "~/tasks/page/data/data"
-import { Link } from "react-router"
 
 interface DataTableToolbarProps {
   table: Table<Task>
@@ -37,9 +37,7 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
         )}
       </div>
       <Button variant="secondary" className="h-8 w-[70px] px-2 lg:px-3">
-        <Link to="/tasks/add">
-          添加
-        </Link>
+        <Link to="/tasks/add">添加</Link>
       </Button>
     </div>
   )

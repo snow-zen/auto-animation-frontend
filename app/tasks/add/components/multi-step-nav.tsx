@@ -10,11 +10,11 @@ interface MultiStepNavProps {
 
 export function MultiStepNav({ currentStepIndex, steps }: MultiStepNavProps) {
   return (
-    <div className="absolute -top-20 left-0 w-full md:w-[25%] md:relative md:top-0 md:left-0">
-      <nav className="py-5 h-full rounded-md">
+    <div className="absolute -top-20 left-0 w-full md:relative md:left-0 md:top-0 md:w-[25%]">
+      <nav className="h-full rounded-md py-5">
         <ul className="flex justify-center gap-2 md:flex-col">
           {steps.map((it, idx) => (
-            <li key={it.type} className="flex items-center font-medium pb-1.5">
+            <li key={it.type} className="flex items-center pb-1.5 font-medium">
               {currentStepIndex > idx ? (
                 <CircleCheckBig className="mr-2 h-4 w-4 text-sm text-green-500" />
               ) : (

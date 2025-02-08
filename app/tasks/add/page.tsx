@@ -38,15 +38,15 @@ export default function AddTaskPage() {
           {complete ? (
             <h3 className="text-lg font-medium">任务提交完成</h3>
           ) : (
-            <main className={`"w-full md:mt-5 md:w-[65%]"}`}>
+            <main className={`"w-full md:w-[65%]"} md:mt-5`}>
               <h3 className="text-lg font-medium">Page {total_steps[currentStepIndex]?.title}</h3>
-              <div className="w-full items-center flex justify-between">
+              <div className="flex w-full items-center justify-between">
                 <div className="flex items-center">
-                  <div className="relative after:pointer-events-none after:absolute after:inset-px after:rounded-[11px] after:shadow-highlight after:shadow-white/10 focus-within:after:shadow-[#77f6aa] after:transition">
+                  <div className="after:shadow-highlight relative after:pointer-events-none after:absolute after:inset-px after:rounded-[11px] after:shadow-white/10 after:transition focus-within:after:shadow-[#77f6aa]">
                     <Button
                       type="button"
                       onClick={nextStep}
-                      className="relative text-neutral-200 bg-neutral-900 border border-black/20 shadow-input shadow-black/10 rounded-xl hover:text-white"
+                      className="relative rounded-xl border border-black/20 bg-neutral-900 text-neutral-200 shadow-black/10 shadow-input hover:text-white"
                     >
                       {currentStepIndex >= total_steps.length - 1 ? "完成" : "下一步"}
                     </Button>
